@@ -1,0 +1,20 @@
+/* The SPFx dialog API has no size option (IDialogConfiguration only carries
+   isBlocking), so the modal is sized by giving its content an explicit size —
+   which keeps us out of the Fluent UI dialog DOM. */
+
+.dialog {
+  display: flex;
+  flex-direction: column;
+  width: 88vw;
+  max-width: 1100px;
+  height: 82vh;
+  max-height: 900px;
+  min-height: 320px;
+}
+
+.body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}

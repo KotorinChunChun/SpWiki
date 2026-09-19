@@ -1,0 +1,19 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "22.14.0",
+    "sdksVersions": {},
+    "version": "1.23.2",
+    "libraryName": "sp-wiki",
+    "libraryId": "b08b7dff-253e-41e8-bb5a-2c471b64b2ea",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "sp-wiki",
+    "solutionShortDescription": "SpWiki - Markdown and HTML wiki for SharePoint Online",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart",
+    "useHeft": false
+  }
+}

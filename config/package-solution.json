@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "SpWiki",
+    "id": "b08b7dff-253e-41e8-bb5a-2c471b64b2ea",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "SpWiki - Markdown and HTML wiki for SharePoint Online"
+      },
+      "longDescription": {
+        "default": "Renders Markdown files stored in a SharePoint document library, with relative link navigation and URL sharing."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "SpWiki Feature",
+        "description": "The feature that activates the SpWiki web part.",
+        "id": "a0735bdc-baab-49eb-8d1d-687e49d64589",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/SpWiki.sppkg"
+  }
+}

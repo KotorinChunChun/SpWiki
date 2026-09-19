@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SpWiki - ローカル確認用</title>
+  <link rel="stylesheet" href="/tests/harness/harness.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">SpWiki<span>ローカル確認用ハーネス</span></div>
+      <nav id="nav">
+        <a href="?file=README.md" data-path="README.md">README.md</a>
+        <a href="?file=guide/index.md" data-path="guide/index.md">guide/index.md</a>
+        <a href="?file=guide/install.md" data-path="guide/install.md">guide/install.md</a>
+        <a href="?file=guide/update.md" data-path="guide/update.md">guide/update.md</a>
+        <a href="?file=guide/faq.md" data-path="guide/faq.md">guide/faq.md</a>
+        <a href="?file=guide/html-sample.html" data-path="guide/html-sample.html">guide/html-sample.html</a>
+        <a href="?file=guide/missing.md" data-path="guide/missing.md">guide/missing.md (404)</a>
+      </nav>
+      <p class="hint">
+        SharePoint 上の Web パーツと同じ描画・リンク解決・履歴処理・ツールバー・
+        関連ページ・タグ編集を、<code>tests/fixtures/documents</code> をライブラリ代わりにして
+        動かしています。タグは <code>mock-metadata.json</code> から読み、
+        保存はメモリ上だけです。<code>.html</code> は Markdown 変換を通さず、
+        同じサニタイズと同じ体裁で描画されます。
+      </p>
+    </aside>
+
+    <main class="viewer" id="viewer">
+      <div class="top-panel" id="topPanel">
+        <div class="header" id="toolbar"></div>
+        <div class="rename-panel" id="renamePanel"></div>
+        <div class="tag-bar" id="tagBar"></div>
+        <div class="nav-host" id="nav-panel"></div>
+        <div class="outline-popup" id="outlinePopup"></div>
+      </div>
+      <div class="notice" id="notice"></div>
+      <div class="tag-panel" id="tagPanel"></div>
+      <div class="body" id="body">
+        <div class="side-pane" id="sidePane"></div>
+        <div class="content" id="content"></div>
+      </div>
+      <div class="footer">ページ: <span id="footerPath"></span></div>
+      <div class="toasts" id="toasts"></div>
+    </main>
+  </div>
+
+  <script src="/tests/harness/dist/harness.js"></script>
+</body>
+</html>

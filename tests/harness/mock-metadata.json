@@ -1,0 +1,68 @@
+{
+  "fields": [
+    {
+      "internalName": "DocTags",
+      "entityPropertyName": "DocTags",
+      "title": "タグ",
+      "kind": "multiChoice",
+      "choices": ["設計", "SPFx", "運用", "FAQ", "リリース"],
+      "allowFillIn": true
+    },
+    {
+      "internalName": "DocCategory",
+      "entityPropertyName": "DocCategory",
+      "title": "分類",
+      "kind": "choice",
+      "choices": ["手順書", "リファレンス", "議事録"],
+      "allowFillIn": false
+    },
+    {
+      "internalName": "DocOwner",
+      "entityPropertyName": "DocOwner",
+      "title": "担当",
+      "kind": "text",
+      "choices": [],
+      "allowFillIn": true
+    }
+  ],
+  "folders": {
+    "": { "folders": ["guide", "images"], "files": ["README.md"] },
+    "guide": {
+      "folders": [],
+      "files": ["index.md", "install.md", "update.md", "faq.md", "html-sample.html"]
+    },
+    "images": { "folders": [], "files": [] }
+  },
+  "pages": [
+    {
+      "path": "README.md",
+      "name": "README.md",
+      "tags": { "DocTags": ["設計", "SPFx"], "DocCategory": ["リファレンス"], "DocOwner": ["山田"] }
+    },
+    {
+      "path": "guide/index.md",
+      "name": "index.md",
+      "tags": { "DocTags": ["設計", "運用"], "DocCategory": ["手順書"], "DocOwner": [] }
+    },
+    {
+      "path": "guide/install.md",
+      "name": "install.md",
+      "tags": { "DocTags": ["設計", "SPFx"], "DocCategory": ["手順書"], "DocOwner": ["山田"] }
+    },
+    {
+      "path": "guide/update.md",
+      "name": "update.md",
+      "tags": { "DocTags": ["運用", "リリース"], "DocCategory": ["手順書"], "DocOwner": [] }
+    },
+    {
+      "path": "guide/faq.md",
+      "name": "faq.md",
+      "tags": { "DocTags": ["FAQ", "運用"], "DocCategory": ["リファレンス"], "DocOwner": [] }
+    },
+    {
+      "path": "guide/html-sample.html",
+      "name": "html-sample.html",
+      "tags": { "DocTags": ["設計", "SPFx"], "DocCategory": ["リファレンス"], "DocOwner": [] }
+    }
+  ]
+}

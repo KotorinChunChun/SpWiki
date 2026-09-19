@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>HTML ページのサンプル</title>
+  <style>
+    /* このスタイルはビューアーに届きません。表示は Markdown と同じ体裁になります。 */
+    body { background: #ff0000; }
+  </style>
+</head>
+<body>
+  <h1>HTML ページのサンプル</h1>
+
+  <p>
+    このファイルは <code>.html</code> です。ビューアーは Markdown 変換を行わず、
+    サニタイズしたうえでそのまま描画します。見出し・表・コードの体裁は
+    <a href="../README.md">Markdown のページ</a>と同じものが適用されます。
+  </p>
+
+  <h2>Markdown との違い</h2>
+
+  <table>
+    <caption>同じ扱いになるもの / ならないもの</caption>
+    <thead>
+      <tr><th scope="col">項目</th><th scope="col">.md</th><th scope="col">.html</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>相対リンクの解決</td><td>する</td><td>する</td></tr>
+      <tr><td>画像の相対パス解決</td><td>する</td><td>する</td></tr>
+      <tr><td>見出しへの id 付与</td><td>する</td><td>する</td></tr>
+      <tr><td>コードのハイライト</td><td>する</td><td>する（<code>class="language-*"</code>）</td></tr>
+      <tr><td>Markdown 記法</td><td>解釈する</td><td>解釈しない（**そのまま**）</td></tr>
+      <tr><td><code>&lt;style&gt;</code> / <code>style</code> 属性</td><td>除去</td><td>除去</td></tr>
+      <tr><td><code>&lt;script&gt;</code> / <code>&lt;iframe&gt;</code></td><td>除去</td><td>除去</td></tr>
+    </tbody>
+  </table>
+
+  <h2>相対リンクと画像</h2>
+
+  <ul>
+    <li><a href="install.md">インストール手順</a> — <code>guide/install.md</code> に解決されます</li>
+    <li><a href="index.md">ガイドの入口</a> — 同じフォルダーの Markdown へ</li>
+    <li><a href="/README.md">ライブラリ直下指定</a> — 先頭の <code>/</code> はライブラリのルート基準</li>
+    <li><a href="https://aka.ms/spfx">SharePoint Framework</a> — 外部リンクは新しいタブ</li>
+  </ul>
+
+  <figure>
+    <img src="../images/sample.png" alt="サンプル画像">
+    <figcaption>図 1: 画像も HTML ファイルの位置を基準に解決されます</figcaption>
+  </figure>
+
+  <h2>コードのハイライト</h2>
+
+  <pre><code class="language-typescript">export function documentFormat(path: string): DocumentFormat {
+  return isHtmlPath(path) ? 'html' : 'markdown';
+}</code></pre>
+
+  <h2>除去される要素</h2>
+
+  <p>次の 3 行は描画されません。</p>
+
+  <script>alert('この script は除去されます');</script>
+  <iframe src="https://example.com"></iframe>
+  <p style="color: #ff0000; font-size: 32px">style 属性は落ちるので、この行は通常の本文の体裁になります。</p>
+
+  <details>
+    <summary>折りたたみも使えます</summary>
+    <p>details / summary は許可された要素です。</p>
+  </details>
+</body>
+</html>

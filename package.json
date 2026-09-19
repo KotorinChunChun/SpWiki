@@ -1,0 +1,53 @@
+{
+  "name": "sp-wiki",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.14.0 < 23.0.0"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "setup:node22": "pwsh -File dev/scripts/setup-node22.ps1",
+    "docs:build": "node dev/scripts/build-docs.mjs",
+    "build": "node dev/scripts/build-docs.mjs && pwsh -File dev/scripts/spfx.ps1 bundle",
+    "clean": "pwsh -File dev/scripts/spfx.ps1 clean",
+    "package": "pwsh -File dev/scripts/spfx.ps1 bundle --ship && pwsh -File dev/scripts/spfx.ps1 package-solution --ship",
+    "release": "pwsh -File dev/scripts/release.ps1",
+    "serve": "pwsh -File dev/scripts/spfx.ps1 serve",
+    "test": "node dev/scripts/run-tests.mjs",
+    "harness:build": "node dev/scripts/build-harness.mjs",
+    "harness": "node dev/scripts/harness-server.mjs"
+  },
+  "dependencies": {
+    "@microsoft/sp-component-base": "1.23.2",
+    "@microsoft/sp-core-library": "1.23.2",
+    "@microsoft/sp-dialog": "^1.23.2",
+    "@microsoft/sp-http": "1.23.2",
+    "@microsoft/sp-listview-extensibility": "^1.23.2",
+    "@microsoft/sp-lodash-subset": "1.23.2",
+    "@microsoft/sp-office-ui-fabric-core": "1.23.2",
+    "@microsoft/sp-property-pane": "1.23.2",
+    "@microsoft/sp-webpart-base": "1.23.2",
+    "dompurify": "^3.4.13",
+    "highlight.js": "^11.11.1",
+    "marked": "^15.0.12",
+    "tslib": "2.3.1"
+  },
+  "devDependencies": {
+    "@fluentui/react": "^8.106.4",
+    "@microsoft/eslint-config-spfx": "1.23.2",
+    "@microsoft/eslint-plugin-spfx": "1.23.2",
+    "@microsoft/rush-stack-compiler-5.3": "0.1.0",
+    "@microsoft/sp-build-web": "1.23.2",
+    "@microsoft/sp-module-interfaces": "1.23.2",
+    "@rushstack/eslint-config": "4.3.0",
+    "@types/webpack-env": "~1.15.2",
+    "@typescript-eslint/parser": "8.56.1",
+    "ajv": "8.18.0",
+    "esbuild": "^0.25.0",
+    "eslint": "8.57.0",
+    "gulp": "4.0.2",
+    "jsdom": "^26.1.0",
+    "typescript": "~5.3.3"
+  }
+}

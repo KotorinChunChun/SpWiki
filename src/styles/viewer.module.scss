@@ -1,0 +1,1495 @@
+.spWiki {
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  font-size: 14px;
+  line-height: 1.7;
+  word-wrap: break-word;
+}
+
+.header {
+  border-bottom: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+.notice:not(:empty),
+.tagPanel:not(:empty),
+.renamePanel:not(:empty),
+.permPanel:not(:empty),
+.tagBar:not(:empty) {
+  border-bottom: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+/* Fixed rather than absolute: the confirmation belongs to the reader's screen,
+   not to a web part that may be scrolled halfway out of view. */
+.toasts {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.tagBar:not(:empty) {
+  padding: 6px 12px;
+}
+
+/* The menu hangs under the hamburger button rather than pushing the document
+   down, so opening it does not move what the reader is looking at. */
+.nav {
+  position: relative;
+}
+
+/* The chrome that stays put while the document scrolls.
+   `--mdv-top` is written by the web part after every render: the height depends
+   on how many tag columns are configured and which panels are open, so it is
+   measured rather than guessed, and the side pane starts where this ends. */
+.topPanel {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: "[theme:white, default: #ffffff]";
+}
+
+/* One column normally; two once a side panel is pinned. */
+.body {
+  display: block;
+}
+
+.bodyPinned {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.sidePane {
+  display: none;
+}
+
+.bodyPinned .sidePane {
+  display: block;
+  position: sticky;
+  top: var(--mdv-top, 0px);
+  flex: 0 0 250px;
+  max-width: 250px;
+  max-height: calc(100vh - var(--mdv-top, 0px));
+  overflow-y: auto;
+  border-right: 1px solid "[theme:neutralLight, default: #edebe9]";
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+.bodyPinned .content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* The popup hangs off the toolbar rather than pushing the document down, so
+   glancing at the outline does not move what is being read. */
+.outlinePopup {
+  position: relative;
+}
+
+.content {
+  padding: 12px 12px 4px;
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 1.4em 0 0.6em;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: 1.8em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid "[theme:neutralLight, default: #edebe9]";
+  }
+
+  h2 {
+    font-size: 1.45em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid "[theme:neutralLight, default: #edebe9]";
+  }
+
+  h3 { font-size: 1.2em; }
+  h4 { font-size: 1.05em; }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  p, ul, ol, blockquote, table, pre, dl, figure {
+    margin: 0 0 1em;
+  }
+
+  ul, ol {
+    padding-left: 1.6em;
+  }
+
+  li > ul,
+  li > ol {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: "[theme:link, default: #03787c]";
+    color: var(--link);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: "[theme:linkHovered, default: #014446]";
+      color: var(--linkHovered);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    margin-left: 0;
+    padding: 0.2em 1em;
+    border-left: 4px solid "[theme:neutralQuaternary, default: #d2d0ce]";
+    color: "[theme:neutralSecondary, default: #605e5c]";
+  }
+
+  hr {
+    height: 1px;
+    border: 0;
+    background: "[theme:neutralLight, default: #edebe9]";
+    margin: 1.6em 0;
+  }
+
+  table {
+    border-collapse: collapse;
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  th, td {
+    border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+    padding: 6px 13px;
+  }
+
+  th {
+    background: "[theme:neutralLighter, default: #f3f2f1]";
+    font-weight: 600;
+  }
+
+  tbody tr:nth-child(2n) {
+    background: "[theme:neutralLighterAlt, default: #faf9f8]";
+  }
+
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.9em;
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    background: "[theme:neutralLighter, default: #f3f2f1]";
+  }
+
+  pre {
+    padding: 12px 14px;
+    overflow-x: auto;
+    border-radius: 4px;
+    background: "[theme:neutralLighterAlt, default: #faf9f8]";
+    border: 1px solid "[theme:neutralLight, default: #edebe9]";
+
+    code {
+      padding: 0;
+      background: transparent;
+      font-size: 0.875em;
+      line-height: 1.55;
+    }
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.4em;
+  }
+
+  /* Elements an .html document can bring that Markdown never produces. */
+
+  figure {
+    padding: 0;
+  }
+
+  figcaption,
+  caption {
+    font-size: 0.9em;
+    color: "[theme:neutralSecondary, default: #605e5c]";
+  }
+
+  caption {
+    text-align: left;
+    padding-bottom: 4px;
+  }
+
+  dt {
+    font-weight: 600;
+  }
+
+  dd {
+    margin: 0 0 0.6em 1.6em;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  details {
+    margin: 0 0 1em;
+  }
+
+  mark {
+    background: "[theme:themeLighter, default: #cdeaea]";
+  }
+}
+
+.footer {
+  padding: 8px 12px;
+  border-top: 1px solid "[theme:neutralLight, default: #edebe9]";
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  font-size: 12px;
+}
+
+.status {
+  padding: 24px 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+.error {
+  padding: 24px 12px;
+  color: "[theme:redDark, default: #a4262c]";
+}
+
+.errorDetail {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+/* Toolbar, tag bar, tag editor, search results and notices.
+   These use plain `mdv-*` class names — wrapped in :global so the CSS modules
+   rewriting leaves them alone — because core/chrome.ts and core/relatedPages.ts
+   build the same markup for the web part and for the local test harness. */
+
+:global(.mdv-toolbar) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+}
+
+:global(.mdv-toolbar-title) {
+  flex: 1 1 auto;
+  /* Enough to stay readable in a narrow column; the actions wrap below it
+     rather than squeezing the title down to one character. */
+  min-width: 8em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: inherit;
+}
+
+:global(.mdv-toolbar-title:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  text-decoration: underline;
+}
+
+/* Second row: the file name, then the folder holding it. */
+:global(.mdv-toolbar-file) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 12px 6px;
+}
+
+:global(.mdv-toolbar-path) {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+:global(.mdv-toolbar-folder) {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+/* A breadcrumb: each segment opens that folder on its own. */
+:global(.mdv-toolbar-folder-link) {
+  color: "[theme:link, default: #03787c]";
+  text-decoration: none;
+}
+
+:global(.mdv-toolbar-folder-link:hover) {
+  text-decoration: underline;
+}
+
+:global(.mdv-toolbar-folder-sep) {
+  margin: 0 3px;
+  color: "[theme:neutralTertiary, default: #a19f9d]";
+}
+
+:global(.mdv-outline-btn) {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-outline-btn-pinned) {
+  color: "[theme:themePrimary, default: #03787c]";
+  border-color: "[theme:themePrimary, default: #03787c]";
+  background: "[theme:themeLighter, default: #cdeaea]";
+}
+
+/* Absolute in the popup host, static in the pinned pane — the same panel in
+   two places, which is why the positioning lives on the host. */
+:global(.mdv-outline-panel) {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.outlinePopup :global(.mdv-outline-panel) {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 12px;
+  min-width: 220px;
+  max-width: 380px;
+  max-height: 60vh;
+  overflow-y: auto;
+  border-radius: 4px;
+  background: "[theme:white, default: #ffffff]";
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+:global(.mdv-outline-title) {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-outline) ul {
+  margin: 0;
+  padding-left: 1.1em;
+  list-style: none;
+}
+
+:global(.mdv-outline) li {
+  margin: 2px 0;
+}
+
+:global(.mdv-outline) a {
+  color: "[theme:link, default: #03787c]";
+  text-decoration: none;
+}
+
+:global(.mdv-outline) a:hover {
+  text-decoration: underline;
+}
+
+:global(.mdv-toolbar-actions) {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 6px;
+}
+
+:global(.mdv-btn) {
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+  background: "[theme:white, default: #ffffff]";
+  color: "[theme:bodyText, default: #323130]";
+}
+
+:global(.mdv-btn:hover:not([disabled])) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+:global(.mdv-btn[disabled]) {
+  opacity: 0.45;
+  cursor: default;
+}
+
+:global(.mdv-btn-primary) {
+  border-color: "[theme:themePrimary, default: #03787c]";
+  background: "[theme:themePrimary, default: #03787c]";
+  color: "[theme:white, default: #ffffff]";
+}
+
+:global(.mdv-btn-primary:hover:not([disabled])) {
+  background: "[theme:themeDark, default: #014446]";
+}
+
+/* One size for the three icon buttons — the file tree, the outline and the
+   padlock. They do the same kind of thing, and different shapes at different
+   sizes read as unrelated controls. */
+:global(.mdv-menu-btn),
+:global(.mdv-outline-btn),
+:global(.mdv-perm-btn) {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 26px;
+  padding: 0;
+}
+
+:global(.mdv-menu-btn-pinned) {
+  color: "[theme:themePrimary, default: #03787c]";
+  border-color: "[theme:themePrimary, default: #03787c]";
+  background: "[theme:themeLighter, default: #cdeaea]";
+}
+
+:global(.mdv-toolbar-path-action) {
+  font: inherit;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  color: inherit;
+}
+
+:global(.mdv-toolbar-path-action:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+/* Tag bar: one row per configured column, under the file name. */
+
+:global(.mdv-tag-row) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+:global(.mdv-tag-row:last-child) {
+  margin-bottom: 0;
+}
+
+:global(.mdv-tag-row-label) {
+  font-size: 11px;
+  min-width: 6em;
+  text-align: left;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-tag-row-edit) {
+  font-family: inherit;
+  border: 0;
+  background: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+:global(.mdv-tag-row-edit:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  text-decoration: underline;
+}
+
+:global(.mdv-tag-link) {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 2px 10px;
+  border-radius: 11px;
+  text-decoration: none;
+}
+
+:global(.mdv-tag-link:hover) {
+  text-decoration: none;
+  filter: brightness(0.94);
+}
+
+:global(.mdv-tag-static) {
+  cursor: default;
+}
+
+/* Headings: fold on click, copy the link from the button on the right. */
+
+:global(.mdv-heading) {
+  cursor: pointer;
+}
+
+:global(.mdv-heading)::before {
+  content: '▾';
+  display: inline-block;
+  width: 0.9em;
+  margin-left: -0.9em;
+  font-size: 0.7em;
+  vertical-align: middle;
+  opacity: 0;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-heading:hover)::before {
+  opacity: 1;
+}
+
+:global(.mdv-collapsed)::before {
+  content: '▸';
+  opacity: 1;
+}
+
+:global(.mdv-hidden) {
+  display: none;
+}
+
+:global(.mdv-heading-copy) {
+  margin-left: 8px;
+  padding: 2px 4px;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  cursor: pointer;
+  opacity: 0;
+  vertical-align: middle;
+}
+
+:global(.mdv-heading:hover .mdv-heading-copy),
+:global(.mdv-heading-copy:focus) {
+  opacity: 1;
+}
+
+:global(.mdv-heading-copy:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+/* Generated table of contents. */
+
+:global(.mdv-toc) {
+  margin: 0 0 1.2em;
+  padding: 8px 12px;
+  border-left: 3px solid "[theme:themePrimary, default: #03787c]";
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+:global(.mdv-toc ul) {
+  margin: 0;
+  padding-left: 1.3em;
+  list-style: none;
+}
+
+:global(.mdv-toc > ul) {
+  padding-left: 0;
+}
+
+:global(.mdv-toc li) {
+  margin: 2px 0;
+  font-size: 0.95em;
+}
+
+/* Tag search results. */
+
+:global(.mdv-search-title) {
+  margin: 0 0 12px;
+  font-size: 1.3em;
+}
+
+/* Hamburger popup. */
+
+/* The same panel, pinned: it fills the pane instead of floating over the page,
+   so everything that made it a popup has to be undone. */
+.sidePane :global(.mdv-nav-panel),
+.sidePane :global(.mdv-outline-panel) {
+  position: static;
+  width: auto;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+:global(.mdv-nav-panel) {
+  position: absolute;
+  z-index: 20;
+  top: 2px;
+  left: 8px;
+  width: 320px;
+  /* Relative to the web part, not the viewport: it can sit in a narrow column
+     next to other web parts, and must not push the page sideways. */
+  max-width: calc(100% - 16px);
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+  background: "[theme:white, default: #ffffff]";
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.16);
+}
+
+:global(.mdv-nav-title) {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  margin-bottom: 6px;
+}
+
+:global(.mdv-nav-new) {
+  padding-bottom: 10px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+:global(.mdv-nav-new-btn) {
+  width: 100%;
+}
+
+:global(.mdv-nav-form) {
+  margin-top: 8px;
+}
+
+:global(.mdv-nav-new-row) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+:global(.mdv-nav-row-label) {
+  flex: 0 0 3.5em;
+  font-size: 11px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-nav-form-actions) {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+:global(.mdv-nav-input) {
+  font: inherit;
+  font-size: 13px;
+  flex: 1 1 140px;
+  min-width: 0;
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+}
+
+:global(.mdv-nav-format) {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+:global(.mdv-nav-row) {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 13px;
+  text-align: left;
+  text-decoration: none;
+  padding: 4px 8px;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global(.mdv-nav-row:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  text-decoration: none;
+}
+
+:global(.mdv-nav-folder)::before {
+  content: '📁 ';
+}
+
+:global(.mdv-nav-file)::before {
+  content: '📄 ';
+}
+
+:global(.mdv-nav-current) {
+  font-weight: 600;
+}
+
+:global(.mdv-nav-active) {
+  font-weight: 600;
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+:global(.mdv-nav-empty) {
+  padding: 6px 8px;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-nav-footer) {
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* Rename panel. */
+
+:global(.mdv-rename-panel) {
+  padding: 10px 12px;
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+:global(.mdv-rename-row) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+:global(.mdv-rename-label) {
+  flex: 0 0 6em;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-tag-section) {
+  padding: 6px 0;
+}
+
+:global(.mdv-tag-section + .mdv-tag-section) {
+  border-top: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+:global(.mdv-tag-section-title) {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+:global(.mdv-tag-add) {
+  flex: 1 1 180px;
+}
+
+/* Its own row above the box, so the warning icon has somewhere to sit that is
+   still clearly about adding a tag rather than about the column as a whole. */
+:global(.mdv-tag-add-label) {
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-toast) {
+  padding: 7px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  max-width: 320px;
+  color: "[theme:white, default: #ffffff]";
+  background: rgba(37, 36, 35, 0.92);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+:global(.mdv-toast-leaving) {
+  opacity: 0;
+}
+
+/* The bubble is a child of the marker so :hover and :focus-within can reveal it
+   with no script and, unlike `title`, no delay. */
+:global(.mdv-tip-host) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+}
+
+:global(.mdv-tip) {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 6px);
+  z-index: 10;
+  width: max-content;
+  max-width: 320px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: normal;
+  color: "[theme:white, default: #ffffff]";
+  background: rgba(37, 36, 35, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease;
+}
+
+:global(.mdv-tip-host:hover) :global(.mdv-tip),
+:global(.mdv-tip-host:focus) :global(.mdv-tip),
+:global(.mdv-tip-host:focus-within) :global(.mdv-tip) {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* The button lives on the wrapper, not inside the `pre`: a `pre` scrolls, and a
+   button inside it slides away with a long line. */
+:global(.mdv-code-block) {
+  position: relative;
+}
+
+:global(.mdv-code-copy) {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  background: "[theme:white, default: #ffffff]";
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* Revealed on approach, but always reachable from the keyboard. */
+:global(.mdv-code-block:hover) :global(.mdv-code-copy),
+:global(.mdv-code-copy:focus) {
+  opacity: 1;
+}
+
+:global(.mdv-code-copy:hover) {
+  color: "[theme:themePrimary, default: #0078d4]";
+  border-color: "[theme:themePrimary, default: #0078d4]";
+}
+
+:global(.mdv-tag-warn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: help;
+  color: #fff;
+  background: "[theme:severeWarning, default: #d83b01]";
+}
+
+/* A disabled input is only a shade lighter by default, which nobody notices.
+   The hatching and the barred cursor are what make it read as "closed". */
+:global(.mdv-tag-add-disabled) {
+  cursor: not-allowed;
+  color: "[theme:neutralTertiary, default: #a19f9d]";
+  border-style: dashed;
+  border-color: "[theme:neutralTertiaryAlt, default: #c8c6c4]";
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5px,
+    rgba(0, 0, 0, 0.045) 5px,
+    rgba(0, 0, 0, 0.045) 10px
+  );
+}
+
+:global(.mdv-tag-add-disabled::placeholder) {
+  color: "[theme:neutralTertiary, default: #a19f9d]";
+  font-style: italic;
+}
+
+:global(.mdv-notice) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+:global(.mdv-notice-message) {
+  flex: 1 1 240px;
+}
+
+:global(.mdv-notice-detail) {
+  flex: 1 1 100%;
+  font-family: Consolas, "Courier New", monospace;
+  word-break: break-all;
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  padding: 4px 6px;
+  border-radius: 3px;
+}
+
+:global(.mdv-notice-actions) {
+  display: flex;
+  gap: 6px;
+}
+
+:global(.mdv-tag-panel) {
+  padding: 10px 12px;
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+:global(.mdv-tag-panel-title) {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+:global(.mdv-tag-panel-body) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  margin-bottom: 10px;
+}
+
+:global(.mdv-tag-option) {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+:global(.mdv-tag-input) {
+  font: inherit;
+  flex: 1 1 260px;
+  padding: 5px 8px;
+  border-radius: 3px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+}
+
+:global(.mdv-tag-hint) {
+  flex: 1 1 100%;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-tag-panel-footer) {
+  display: flex;
+  gap: 6px;
+}
+
+:global(.mdv-tag-error:not(:empty)) {
+  margin-top: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+  word-break: break-word;
+  color: "[theme:redDark, default: #a4262c]";
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  border-left: 3px solid "[theme:redDark, default: #a4262c]";
+}
+
+:global(.mdv-directive) {
+  margin: 8px 0 14px;
+}
+
+/* The box characters only line up under one another in a monospace font, and
+   lining up is the whole reason they are there. */
+:global(.mdv-tree) {
+  font-family: Consolas, "Courier New", "Yu Gothic", monospace;
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+:global(.mdv-tree-row) {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+:global(.mdv-tree-lock) {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 6px;
+  vertical-align: middle;
+  color: "[theme:severeWarning, default: #d83b01]";
+}
+
+:global(.mdv-tree-prefix) {
+  color: "[theme:neutralTertiary, default: #a19f9d]";
+  user-select: none;
+}
+
+:global(.mdv-tree-label),
+:global(.mdv-tree-folder-link) {
+  font-weight: 600;
+}
+
+:global(.mdv-tree-label) {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-tree-folder-link) {
+  color: "[theme:link, default: #03787c]";
+  text-decoration: none;
+}
+
+:global(.mdv-tree-folder-link:hover) {
+  text-decoration: underline;
+}
+
+:global(.mdv-tree-current) :global(.mdv-related-link),
+:global(.mdv-directive-current) :global(.mdv-related-link) {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Whole-viewer actions in the popup, kept apart from the file list above. */
+:global(.mdv-nav-tools) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+:global(.mdv-nav-tool) {
+  font: inherit;
+  font-size: 12px;
+  border: 0;
+  background: none;
+  padding: 3px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  text-align: left;
+  color: "[theme:link, default: #03787c]";
+}
+
+:global(.mdv-nav-tool:hover) {
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  text-decoration: underline;
+}
+
+:global(.mdv-help-panel) {
+  padding: 10px 12px;
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+:global(.mdv-help-back) {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: "[theme:link, default: #03787c]";
+  text-decoration: none;
+}
+
+:global(.mdv-help-back:hover) {
+  text-decoration: underline;
+}
+
+:global(.mdv-help-docs) {
+  margin: 0 0 1.5em;
+  padding-left: 1.3em;
+}
+
+:global(.mdv-help-intro) {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-help-row) {
+  margin-bottom: 8px;
+}
+
+:global(.mdv-help-label) {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-help-value-row) {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+:global(.mdv-help-value) {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 5px 8px;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  border-radius: 3px;
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+:global(.mdv-help-copy) {
+  flex: 0 0 auto;
+}
+
+:global(.mdv-perm-panel) {
+  padding: 10px 12px;
+  background: "[theme:neutralLighterAlt, default: #faf9f8]";
+}
+
+/* Heading, state and the action on one line. */
+:global(.mdv-perm-heading) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+:global(.mdv-perm-heading-title) {
+  margin: 0;
+}
+
+:global(.mdv-perm-badge) {
+  font-size: 11px;
+  line-height: 1.5;
+  padding: 2px 10px;
+  border-radius: 11px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+}
+
+/* The restricted state is the one worth spotting across the room. */
+:global(.mdv-perm-badge-unique) {
+  font-weight: 600;
+  color: "[theme:white, default: #ffffff]";
+  background: "[theme:severeWarning, default: #d83b01]";
+}
+
+:global(.mdv-perm-action) {
+  margin-left: auto;
+}
+
+/* The padlock sits with the file name, in front of it. */
+:global(.mdv-perm-btn) {
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-perm-btn-locked) {
+  color: "[theme:severeWarning, default: #d83b01]";
+  border-color: "[theme:severeWarning, default: #d83b01]";
+}
+
+:global(.mdv-perm-search) {
+  flex: 0 0 auto;
+}
+
+:global(.mdv-perm-search-error) {
+  padding: 6px 8px;
+  font-size: 12px;
+  border-radius: 3px;
+  word-break: break-word;
+  color: "[theme:redDark, default: #a4262c]";
+  background: "[theme:neutralLighter, default: #f3f2f1]";
+  border-left: 3px solid "[theme:redDark, default: #a4262c]";
+}
+
+:global(.mdv-notfound-message) {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+:global(.mdv-notfound-reason) {
+  margin: 0 0 12px;
+  font-size: 13px;
+}
+
+:global(.mdv-notfound-tree) {
+  margin-top: 18px;
+  text-align: left;
+}
+
+:global(.mdv-perm-block) {
+  margin-bottom: 12px;
+}
+
+:global(.mdv-perm-list) {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Capped, so the level and the remove button stay next to the name they belong
+   to instead of being flung to the far edge of a wide page. */
+:global(.mdv-perm-row),
+:global(.mdv-perm-result),
+:global(.mdv-perm-add-row) {
+  max-width: 1000px;
+}
+
+:global(.mdv-perm-row) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 13px;
+}
+
+:global(.mdv-perm-btn-unknown) {
+  opacity: 0.55;
+}
+
+:global(.mdv-perm-kind) {
+  flex: 0 0 auto;
+}
+
+:global(.mdv-perm-name) {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:global(.mdv-perm-role),
+:global(.mdv-perm-email) {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-perm-add-row) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+:global(.mdv-perm-role-select) {
+  font: inherit;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border: 1px solid "[theme:neutralQuaternaryAlt, default: #e1dfdd]";
+}
+
+:global(.mdv-perm-results) {
+  margin-top: 6px;
+}
+
+:global(.mdv-perm-result) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px;
+  font-size: 13px;
+  border-radius: 3px;
+  background: "[theme:white, default: #ffffff]";
+  border: 1px solid "[theme:neutralLight, default: #edebe9]";
+  margin-bottom: 4px;
+}
+
+/* Amber rather than red: these are things to know before acting, not failures. */
+:global(.mdv-perm-warning) {
+  margin: 4px 0;
+  padding: 6px 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  border-radius: 3px;
+  color: "[theme:neutralPrimary, default: #323130]";
+  background: "[theme:warningHighlight, default: #fff4ce]";
+  border-left: 3px solid "[theme:severeWarning, default: #d83b01]";
+}
+
+/* The confirmation is the loudest thing on the panel on purpose. */
+:global(.mdv-perm-confirm) {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  background: "[theme:white, default: #ffffff]";
+  border: 2px solid "[theme:severeWarning, default: #d83b01]";
+}
+
+:global(.mdv-perm-confirm-title) {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+:global(.mdv-perm-confirm-body) {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+:global(.mdv-perm-confirm-actions) {
+  display: flex;
+  gap: 6px;
+}
+
+:global(.mdv-search-form) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+:global(.mdv-search-term) {
+  flex: 2 1 220px;
+}
+
+:global(.mdv-search-scope) {
+  flex: 1 1 180px;
+}
+
+:global(.mdv-search-modes) {
+  flex: 1 1 100%;
+  display: flex;
+  gap: 16px;
+}
+
+:global(.mdv-search-count) {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-search-snippets) {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid "[theme:neutralLight, default: #edebe9]";
+}
+
+:global(.mdv-search-snippet) {
+  margin-bottom: 10px;
+}
+
+:global(.mdv-search-snippet-text) {
+  font-size: 12px;
+  line-height: 1.6;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-related-empty) {
+  margin: 0;
+  font-size: 13px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+:global(.mdv-related-list) {
+  margin: 0;
+  padding-left: 1.3em;
+}
+
+:global(.mdv-related-list li) {
+  margin-bottom: 3px;
+}
+
+:global(.mdv-related-link) {
+  color: "[theme:link, default: #03787c]";
+  text-decoration: none;
+}
+
+:global(.mdv-related-link:hover) {
+  text-decoration: underline;
+}
+
+:global(.mdv-related-folder) {
+  margin-left: 8px;
+  font-size: 12px;
+  color: "[theme:neutralSecondary, default: #605e5c]";
+}
+
+/* highlight.js token colours. Wrapped in :global so the class names survive
+   the CSS modules rewriting and keep matching highlight.js output. */
+:global(.hljs-comment),
+:global(.hljs-quote) {
+  color: #6a737d;
+  font-style: italic;
+}
+
+:global(.hljs-keyword),
+:global(.hljs-selector-tag),
+:global(.hljs-literal),
+:global(.hljs-doctag),
+:global(.hljs-formula) {
+  color: #d73a49;
+}
+
+:global(.hljs-string),
+:global(.hljs-regexp),
+:global(.hljs-addition),
+:global(.hljs-meta-string) {
+  color: #032f62;
+}
+
+:global(.hljs-number),
+:global(.hljs-symbol),
+:global(.hljs-variable),
+:global(.hljs-template-variable),
+:global(.hljs-attr),
+:global(.hljs-attribute) {
+  color: #005cc5;
+}
+
+:global(.hljs-title),
+:global(.hljs-section),
+:global(.hljs-name),
+:global(.hljs-selector-id),
+:global(.hljs-selector-class) {
+  color: #6f42c1;
+}
+
+:global(.hljs-built_in),
+:global(.hljs-class .hljs-title),
+:global(.hljs-type) {
+  color: #e36209;
+}
+
+:global(.hljs-meta) {
+  color: #6a737d;
+}
+
+:global(.hljs-deletion) {
+  color: #b31d28;
+}
+
+:global(.hljs-emphasis) {
+  font-style: italic;
+}
+
+:global(.hljs-strong) {
+  font-weight: 600;
+}

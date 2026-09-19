@@ -1,0 +1,10 @@
+/* The dialog sizes itself to its content, so the width is set here rather than
+   through the dialog API (which offers no size option). */
+
+.notice {
+  width: 560px;
+  max-width: 80vw;
+  padding: 4px;
+  font-size: 14px;
+  color: "[theme:bodyText, default: #323130]";
+}

@@ -1,0 +1,52 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules
+
+# Build generated files
+dist
+lib
+lib-dts
+lib-commonjs
+lib-esm
+jest-output
+release
+solution
+temp
+*.sppkg
+.heft
+
+# Local test harness build output
+tests/harness/dist
+
+# Portable Node 22 runtime for the SPFx build (dev/scripts/setup-node22.ps1)
+.tools
+
+# Released packages, kept per version by dev/scripts/release.ps1
+packages
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# OSX
+.DS_Store
+
+# Visual Studio files
+.ntvs_analysis.dat
+.vs
+bin
+obj
+
+# Resx Generated Code
+*.resx.ts
+
+# Styles Generated Code
+*.scss.ts
+
+# 非公開資料と一時作業
+/dev/private/
+/dev/temp/
+/.claude/

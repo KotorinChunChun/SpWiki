@@ -1,0 +1,30 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/command-set-extension-manifest.schema.json",
+  "id": "7bf4c5c5-631b-48cf-b066-e92bfb4c91dc",
+  "alias": "SpWikiCommandSet",
+  "componentType": "Extension",
+  "extensionType": "ListViewCommandSet",
+
+  "version": "*",
+  "manifestVersion": 2,
+
+  "requiresCustomScript": false,
+
+  "items": {
+    "SPWIKI_FULLPAGE": {
+      "title": { "default": "Open in SpWiki", "ja-jp": "SpWiki で開く" },
+      "iconImageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjMDM3ODdjIiBkPSJNMiAyaDEydjJIMnptMCAzaDEydjEuNUgyem0wIDNoN1Y5LjVIMnptMCAzaDdWMTNIMnptOS42LTMuMSAzLjQgMy40LTMuNCAzLjR2LTIuMkgxMHYtMi40aDEuNnoiLz48L3N2Zz4=",
+      "type": "command"
+    },
+    "SPWIKI_PREVIEW": {
+      "title": { "default": "Markdown preview", "ja-jp": "Markdown プレビュー" },
+      "iconImageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjMDM3ODdjIiBkPSJNOCAzQzQuMyAzIDEuNCA1LjYuNCA4YzEgMi40IDMuOSA1IDcuNiA1czYuNi0yLjYgNy42LTVjLTEtMi40LTMuOS01LTcuNi01bTAgOC40QTMuNCAzLjQgMCAxIDEgOCA0LjZhMy40IDMuNCAwIDAgMSAwIDYuOG0wLTUuM2ExLjkgMS45IDAgMSAwIDAgMy44IDEuOSAxLjkgMCAwIDAgMC0zLjgiLz48L3N2Zz4=",
+      "type": "command"
+    },
+    "SPWIKI_OPENAPP": {
+      "title": { "default": "Edit in desktop app", "ja-jp": "デスクトップ アプリで編集" },
+      "iconImageUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBmaWxsPSIjMDM3ODdjIiBkPSJNMSAyaDE0djlIOXYxLjZsMiAxLjRINWwyLTEuNFYxMUgxem0xLjQgMS40djYuMmgxMS4yVjMuNHoiLz48cGF0aCBmaWxsPSIjMDM3ODdjIiBkPSJNMTAuNCA0LjZIMTR2My42aC0xLjNWNi44bC0yLjYgMi42LS45LS45IDIuNi0yLjZoLTEuNHoiLz48L3N2Zz4=",
+      "type": "command"
+    }
+  }
+}
